@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>School Result Card System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <h1>Student Result Card System</h1>
+    <p>Enter marks, get the result card and class position instantly</p>
+  </header>
+
+  <!-- Tabs (bottom bar on mobile) -->
+  <nav class="tabbar">
+    <button class="tab-btn active" data-tab="entry"><span>📝</span>Entry</button>
+    <button class="tab-btn" data-tab="card"><span>📄</span>Card</button>
+    <button class="tab-btn" data-tab="ranking"><span>🏆</span>Ranking</button>
+  </nav>
+
+  <main class="layout">
+
+    <!-- 1. ENTRY FORM -->
+    <section class="panel active" id="tab-entry">
+      <div class="box">
+        <h2>Student details</h2>
+        <label for="school">School name</label>
+        <input id="school" type="text" value="ABC Public School">
+        <label for="name">Student name</label>
+        <input id="name" type="text" placeholder="e.g. Ali Ahmed">
+        <div class="row">
+          <div><label for="roll">Roll no.</label><input id="roll" type="text" placeholder="e.g. 101"></div>
+          <div><label for="cls">Class</label><input id="cls" type="text" placeholder="e.g. 8th"></div>
+        </div>
+        <div class="row">
+          <div><label for="father">Father's name</label><input id="father" type="text"></div>
+          <div>
+            <label for="exam">Exam</label>
+            <select id="exam">
+              <option>First Term</option><option>Mid Term</option><option>Final Term</option><option>Annual</option>
+            </select>
+          </div>
+        </div>
+
+        <h2 class="mt">Subject marks</h2>
+        <div class="row">
+          <div><label for="total">Total marks per subject</label><input id="total" type="number" value="100" min="1"></div>
+          <div><label for="passMark">Pass marks (%)</label><input id="passMark" type="number" value="33" min="0" max="100"></div>
+        </div>
+        <div id="subjects"></div>
+        <button class="btn ghost" id="btn-add-subject" type="button">+ Add subject</button>
+
+        <p class="error" id="error"></p>
+        <div class="actions">
+          <button class="btn primary" id="btn-generate" type="button">Generate result card</button>
+          <button class="btn ghost" id="btn-reset" type="button">Clear form</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. RESULT CARD -->
+    <section class="panel" id="tab-card">
+      <div class="box">
+        <h2>Result card</h2>
+        <div id="card-output"><div class="empty">Fill the form and press "Generate result card".</div></div>
+        <div class="actions no-print" id="print-row" hidden>
+          <button class="btn primary" id="btn-print" type="button">Print / Save as PDF</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. RANKING -->
+    <section class="panel" id="tab-ranking">
+      <div class="box">
+        <h2>🏆 Class ranking (by percentage)</h2>
+        <label for="group">Select class / exam</label>
+        <select id="group"></select>
+        <div id="topper"></div>
+        <div id="rank-list"><div class="empty">No students saved yet.</div></div>
+
+        <div class="actions">
+          <button class="btn ghost" id="btn-export" type="button">⬇ Backup</button>
+          <button class="btn ghost" id="btn-import" type="button">⬆ Restore</button>
+          <button class="btn danger" id="btn-clear-class" type="button">Delete this class</button>
+        </div>
+        <input type="file" id="file-import" accept=".json" hidden>
+        <p class="hint">Data is saved in this browser. Use Backup / Restore to move data to another phone.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/vendor/jquery.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
